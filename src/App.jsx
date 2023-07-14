@@ -9,7 +9,7 @@ function App() {
       <Button variant="text">Text</Button>
       <Button variant="contained">Contained</Button>
       <Button variant="outlined">Outlined</Button>
-      <br/>
+      <br />
       <HomeIcon />
       <HomeIcon color="primary" />
       <HomeIcon color="secondary" />
