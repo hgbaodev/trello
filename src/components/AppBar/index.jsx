@@ -15,16 +15,18 @@ import Badge from '@mui/material/Badge'
 import Tooltip from '@mui/material/Tooltip'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import Profiles from './Menus/Profiles'
+import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck'
 
 const AppBar = () => {
   return (
-    <Box px={2} sx={{
+    <Box sx={{
       width: '100%',
       height: (theme) => theme.trello.appBarHeight,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
       gap: 2,
+      paddingX: 2,
       overflowX: 'auto'
     }}>
       <Box sx={{
@@ -46,7 +48,7 @@ const AppBar = () => {
           <Recent/>
           <Starred/>
           <Templates/>
-          <Button variant="outlined">Created</Button>
+          <Button startIcon={<LibraryAddCheckIcon/>} variant="outlined">Created</Button>
         </Box>
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
