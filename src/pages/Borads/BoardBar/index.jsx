@@ -80,7 +80,7 @@ const BoardBar = () => {
       }}>
         <Button variant="outlined" startIcon={<PersonAddIcon/>}>Invite</Button>
         <AvatarGroup
-          max={7}
+          max={6}
           sx={{
             '& .MuiAvatar-root': {
               width: 34,
@@ -92,12 +92,32 @@ const BoardBar = () => {
           <Tooltip title="hgbaodev">
             <Avatar alt="hgbaodev" src="https://avatars.githubusercontent.com/u/120194990?v=4" />
           </Tooltip>
-          <Tooltip title="hgbaodev">
-            <Avatar alt="hgbaodev" src="https://avatars.githubusercontent.com/u/120194990?v=4" />
-          </Tooltip><Tooltip title="hgbaodev">
-            <Avatar alt="hgbaodev" src="https://avatars.githubusercontent.com/u/120194990?v=4" />
-          </Tooltip><Tooltip title="hgbaodev">
-            <Avatar alt="hgbaodev" src="https://avatars.githubusercontent.com/u/120194990?v=4" />
+          <Tooltip title="v1">
+            <Avatar alt="v1" src="https://thuthuatnhanh.com/wp-content/uploads/2022/06/Anh-Wibu-giau-mat.jpg" />
+          </Tooltip>
+          <Tooltip title="v3">
+            <Avatar alt="v3" src="https://tvmcomics.com.vn/wp-content/uploads/2019/11/anh12-3.jpg" />
+          </Tooltip>
+          <Tooltip title="v3">
+            <Avatar alt="v3" src="https://i.pinimg.com/236x/79/3c/78/793c78f3fd685027ecaa36a5f44b3e34.jpg" />
+          </Tooltip>
+          <Tooltip title="v3">
+            <Avatar alt="v3" src="https://i.pinimg.com/236x/97/58/ae/9758ae3e6b9bcc929cb9511d44a86b0d.jpg" />
+          </Tooltip>
+          <Tooltip title="v3">
+            <Avatar alt="v3" src="https://duhocchaudaiduong.edu.vn/hinh-nen-cool-ngau-nu/imager_76_4257_700.jpg" />
+          </Tooltip>
+          <Tooltip title="v3">
+            <Avatar alt="v3" src="https://duhocchaudaiduong.edu.vn/hinh-nen-cool-ngau-nu/imager_76_4257_700.jpg" />
+          </Tooltip>
+          <Tooltip title="v3">
+            <Avatar alt="v3" src="https://duhocchaudaiduong.edu.vn/hinh-nen-cool-ngau-nu/imager_76_4257_700.jpg" />
+          </Tooltip>
+          <Tooltip title="v3">
+            <Avatar alt="v3" src="https://duhocchaudaiduong.edu.vn/hinh-nen-cool-ngau-nu/imager_76_4257_700.jpg" />
+          </Tooltip>
+          <Tooltip title="v3">
+            <Avatar alt="v3" src="https://duhocchaudaiduong.edu.vn/hinh-nen-cool-ngau-nu/imager_76_4257_700.jpg" />
           </Tooltip>
         </AvatarGroup>
       </Box>
