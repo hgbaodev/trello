@@ -38,10 +38,10 @@ const AppBar = () => {
           alignItems: 'center',
           gap: 0.5
         }}>
-          <SvgIcon fontSize="small" component={TrelloIcon} inheritViewBoxs sx={{ color: 'primary.main' }}/>
+          <SvgIcon fontSize="small" component={TrelloIcon} sx={{ color: 'primary.main' }}/>
           <Typography variant="span" sx={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'primary.main' }}>Trello</Typography>
         </Box>
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
+        <Box sx={{ display: { xs: 'none', sm: 'none', md: 'flex' }, gap: 1 }}>
           <Workspaces/>
           <Recent/>
           <Starred/>
