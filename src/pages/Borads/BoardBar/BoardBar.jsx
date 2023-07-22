@@ -9,6 +9,7 @@ import Avatar from '@mui/material/Avatar'
 import AvatarGroup from '@mui/material/AvatarGroup'
 import { Button, Tooltip } from '@mui/material'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
+import { capitalizeFirstLetter } from '~/utils/formaters'
 
 const MENU_STYLES = {
   color: 'white',
@@ -52,7 +53,7 @@ const BoardBar = ({ board }) => {
         <Chip
           sx={MENU_STYLES}
           icon={<VpnLockIcon />}
-          label={board?.type}
+          label={capitalizeFirstLetter(board?.type)}
           clickable
           onClick={() => {}}
         />
