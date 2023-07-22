@@ -24,7 +24,7 @@ const MENU_STYLES = {
   }
 }
 
-const BoardBar = () => {
+const BoardBar = ({ board }) => {
   return (
     <Box sx={{
       width: '100%',
@@ -44,31 +44,36 @@ const BoardBar = () => {
       }}>
         <Chip
           sx={MENU_STYLES}
-          icon={<DashboardIcon />} label="hgbaodev FULL Stack Board"
+          icon={<DashboardIcon />}
+          label={board?.title}
           clickable
           onClick={() => {}}
         />
         <Chip
           sx={MENU_STYLES}
-          icon={<VpnLockIcon />} label="Pulbic/Private Workspaces"
+          icon={<VpnLockIcon />}
+          label={board?.type}
           clickable
           onClick={() => {}}
         />
         <Chip
           sx={MENU_STYLES}
-          icon={<AddToDriveIcon />} label="Add To Google Drive"
+          icon={<AddToDriveIcon />}
+          label="Add To Google Drive"
           clickable
           onClick={() => {}}
         />
         <Chip
           sx={MENU_STYLES}
-          icon={<BoltIcon />} label="Automation "
+          icon={<BoltIcon />}
+          label="Automation "
           clickable
           onClick={() => {}}
         />
         <Chip
           sx={MENU_STYLES}
-          icon={<FilterListIcon />} label="Filters"
+          icon={<FilterListIcon />}
+          label="Filters"
           clickable
           onClick={() => {}}
         />
