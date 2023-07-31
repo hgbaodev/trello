@@ -20,7 +20,8 @@ function Card( { card } ) {
     touchAction: 'none',
     transform: CSS.Translate.toString(transform),
     transition,
-    opacity: isDragging ? 0.6 : undefined
+    opacity: isDragging ? 0.5 : undefined,
+    border: isDragging ? '1px solid #2ecc71' : undefined
   }
 
   const shouldShowCardActions = () => {
@@ -40,7 +41,7 @@ function Card( { card } ) {
       }}>
       {card?.cover && <CardMedia sx={{ height: 140 }} image={card?.cover}/>}
       <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
-        <Typography >${card?.title}</Typography>
+        <Typography >{card?.title}</Typography>
       </CardContent>
       { shouldShowCardActions() &&
       <CardActions sx={{ p: '0 4px 8px 4px' }}>
