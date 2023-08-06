@@ -54,6 +54,59 @@ const BoardContent = ({ board }) => {
     return orderedColumns.find(column => column?.cards?.map(card => card._id)?.includes(cardId))
   }
 
+  // Cập nhật lại state trong trường hợp di chuyển card giữa các column khác nhau
+  const moveCardBetweenDifferentColumns = (
+    overColumn,
+    overCardId,
+    active,
+    over,
+    activeColumn,
+    activeDraggingCardId,
+    activeDraggingCardData
+  ) => {
+    setOrderedColumns(prevColumns => {
+      // Tìm vị trí (index) của cái overCard trong column đích
+      const overCardIndex = overColumn?.cards?.findIndex(card => card._id === overCardId)
+
+      let newCardIndex
+
+      const isBelowOverItem = active.rect.current.translated && active.rect.current.translated.top > over.rect.top + over.rect.height
+      const modifier = isBelowOverItem ? 1 : 0
+
+      newCardIndex = overCardIndex >= 0 ? overCardIndex + modifier : overColumn?.cards.length + 1
+
+      const nextColumn = cloneDeep(prevColumns)
+      const nextActiveColumns = nextColumn.find(column => column._id === activeColumn._id )
+      const nextOverColumns = nextColumn.find(column => column._id === overColumn._id )
+
+      // Cloumn cũ
+      if (nextActiveColumns) {
+        //Xóa card ở cải column active
+        nextActiveColumns.cards = nextActiveColumns.cards.filter(card => card._id !== activeDraggingCardId)
+        // Cập nhật lại mảng card orderIds
+        nextActiveColumns.cardOrderIds = nextActiveColumns.cards.map(card => card._id)
+      }
+      if (nextActiveColumns) {
+        // Kiểm tra xem cái card đang kéo có tồn tại ở  overColumn hay chưa nếu có thì xóa nó trước đi
+        nextOverColumns.cards = nextOverColumns.cards.filter(card => card._id !== activeDraggingCardId)
+
+        const rebuild_activeDraggingCardId = {
+          ...activeDraggingCardData,
+          columnId: nextOverColumns._id
+        }
+        //Thêm cái card mới vào over column
+        nextOverColumns.cards = nextOverColumns.cards.toSpliced(
+          newCardIndex,
+          0,
+          rebuild_activeDraggingCardId)
+        // Cập nhật lại mảng card orderIds
+        nextOverColumns.cardOrderIds = nextOverColumns.cards.map(card => card._id)
+      }
+
+      return nextColumn
+    })
+  }
+
   const handleDragStart = (event) => {
     setActiveDragItemmId(event?.active?.id)
     setActiveDragItemmType(event?.active?.data?.current?.columnId ? ACTIVE_DRAG_ITEM_TYPE.CARD : ACTIVE_DRAG_ITEM_TYPE.COLUMN)
@@ -68,7 +121,6 @@ const BoardContent = ({ board }) => {
   // Trigger trong quá trình kéo 1 phần từ
   const handleDrapOver = (event) => {
     if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) return
-    // console.log('handleDropOver', event)
     const { active, over } = event
     if (!active || !over) return
 
@@ -84,39 +136,15 @@ const BoardContent = ({ board }) => {
     if (!activeColumn || !overColumn ) return
 
     if (activeColumn._id !== overColumn._id) {
-      setOrderedColumns(prevColumns => {
-        // Tìm vị trí (index) của cái overCard trong column đích
-        const overCardIndex = overColumn?.cards?.findIndex(card => card._id === overCardId)
-
-        let newCardIndex
-
-        const isBelowOverItem = active.rect.current.translated && active.rect.current.translated.top > over.rect.top + over.rect.height
-        const modifier = isBelowOverItem ? 1 : 0
-
-        newCardIndex = overCardIndex >= 0 ? overCardIndex + modifier : overColumn?.cards.length + 1
-
-        const nextColumns = cloneDeep([...prevColumns])
-        const nextActiveColumns = nextColumns.find(column => column._id === activeColumn._id )
-        const nextOverColumns = nextColumns.find(column => column._id === overColumn._id )
-
-        // Cloumn cũ
-        if (nextActiveColumns) {
-          //Xóa card ở cải column active
-          nextActiveColumns.cards = nextActiveColumns.cards.filter(card => card._id !== activeDraggingCardId)
-          // Cập nhật lại mảng card orderIds
-          nextActiveColumns.cardOrderIds = nextActiveColumns.cards.map(card => card._id)
-        }
-        if (overColumn) {
-          // Kiểm tra xem cái card đang kéo có tồn tại ở  overColumn hay chưa nếu có thì xóa nó trước đi
-          nextOverColumns.cards = nextOverColumns.cards.filter(card => card._id !== activeDraggingCardId)
-          //Thêm cái card mới vào over column
-          nextOverColumns.cards = nextOverColumns.cards.toSpliced(newCardIndex, 0, activeDraggingCardData)
-          // Cập nhật lại mảng card orderIds
-          nextOverColumns.cardOrderIds = nextOverColumns.cards.map(card => card._id)
-        }
-
-        return nextColumns
-      })
+      moveCardBetweenDifferentColumns(
+        overColumn,
+        overCardId,
+        active,
+        over,
+        activeColumn,
+        activeDraggingCardId,
+        activeDraggingCardData
+      )
     }
   }
 
@@ -137,6 +165,15 @@ const BoardContent = ({ board }) => {
 
       if (oldColumnWhenDraggingCard._id !== overColumn._id) {
         // Hành động kéo thả card 2 column khác nhau
+        moveCardBetweenDifferentColumns(
+          overColumn,
+          overCardId,
+          active,
+          over,
+          activeColumn,
+          activeDraggingCardId,
+          activeDraggingCardData
+        )
       } else {
         // Hành động kéo thả card cùng 1 column
         const oldCardIndex = oldColumnWhenDraggingCard?.cards?.findIndex(c => c._id === activeDragItemId)
@@ -147,13 +184,13 @@ const BoardContent = ({ board }) => {
 
         setOrderedColumns(prevColumns => {
           // Clone mảng orderedColumnsState cũ ra một cái mơi để xử lý data ròi return - cập nhật lại sau
-          const nextColumns = cloneDeep([...prevColumns])
+          const nextColumn = cloneDeep(prevColumns)
           // Tìm tới column mà chúng ta đang thả
-          const targetColumn = nextColumns.find(column => column._id === overColumn._id)
+          const targetColumn = nextColumn.find(column => column._id === overColumn._id)
           // cập nhật lại column
           targetColumn.cards = dndOrderedCards
           targetColumn.cardOrderIds = dndOrderedCards.map(card => card._id)
-          return nextColumns
+          return nextColumn
         })
       }
     }
