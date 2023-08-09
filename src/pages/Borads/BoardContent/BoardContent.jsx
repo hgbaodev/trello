@@ -254,4 +254,3 @@ const BoardContent = ({ board }) => {
   )
 }
 export default BoardContent
-// oke
