@@ -6,7 +6,8 @@
  */
 
 import express from 'express'
-import { CONNECT_DB, GET_DB } from '~/config/mongodb'
+import exitHook from 'async-exit-hook'
+import { CONNECT_DB, GET_DB, CLOSE_DB } from '~/config/mongodb'
 
 
 const START_SERVER = () => {
@@ -21,6 +22,12 @@ const START_SERVER = () => {
   app.listen(port, hostname, () => {
     // eslint-disable-next-line no-console
     console.log(`3. Hello hgbaodev, Backend server is running successfully at host:  http://${ hostname }:${ port }/`)
+  })
+
+  exitHook(() => {
+    console.log('4. Disconnecting from MogoDb Cloud Atlas')
+    CLOSE_DB()
+    console.log('5. Disconnected from MogoDb Cloud Atlas')
   })
 }
 
