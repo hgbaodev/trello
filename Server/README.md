@@ -32,13 +32,13 @@
 
 ### About Me - Thông tin về mình:
 
-Author: **Trungquandev - Một Lập Trình Viên** & **CodeTQ**
+Author: **hgbaodev - Một Lập Trình Viên** & **CodeTQ**
 
-Blog: https://trungquandev.com/
+Blog: https://hgbaodev.com/
 
-CV: https://cv.trungquandev.com/
+CV: https://cv.hgbaodev.com/
 
-YouTube 01 (Trungquandev - Một Lập Trình Viên): https://www.youtube.com/@trungquandev
+YouTube 01 (hgbaodev - Một Lập Trình Viên): https://www.youtube.com/@hgbaodev
 
 YouTube 02 (CodeTQ): https://www.youtube.com/@code-tq
 
