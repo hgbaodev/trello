@@ -7,25 +7,23 @@
 
 import express from 'express'
 import exitHook from 'async-exit-hook'
-import { CONNECT_DB, GET_DB, CLOSE_DB } from '~/config/mongodb'
+import { CONNECT_DB, CLOSE_DB } from '~/config/mongodb'
+import { env } from '~/config/environment'
 
 
 const START_SERVER = () => {
   const app = express()
 
-  const hostname = 'localhost'
-  const port = 8017
   app.get('/', async (req, res) => {
-    console.log(await GET_DB().listCollections().toArray())
     res.end('<h1>Hello World hgbaodev!</h1><hr>')
   })
-  app.listen(port, hostname, () => {
+  app.listen(env.APP_PORT, env.APP_HOST, () => {
     // eslint-disable-next-line no-console
-    console.log(`3. Hello hgbaodev, Backend server is running successfully at host:  http://${ hostname }:${ port }/`)
+    console.log(`3. Hi ${env.AUTHOR}, Backend server is running successfully at host:  http://${ env.APP_HOST }:${ env.APP_PORT }/`)
   })
 
   exitHook(() => {
-    console.log('4. Disconnecting from MogoDb Cloud Atlas')
+    console.log('4. Server is shutting down....')
     CLOSE_DB()
     console.log('5. Disconnected from MogoDb Cloud Atlas')
   })

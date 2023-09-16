@@ -2,15 +2,13 @@
 //password: aomdc0LN2VlGz0hM
 //DatabaseName: trello-hgbaodev
 
-const MONGODB_URL = 'mongodb+srv://hgbaodev:aomdc0LN2VlGz0hM@cluster0-hgbaodev.imugkwu.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp'
-const DATABASE_NAME = 'trello-hgbaodev'
-
 import { MongoClient, ServerApiVersion } from 'mongodb'
+import { env } from '~/config/environment'
 
 let trelloDatabaseInstance = null
 
 //Khởi tạo 1 đối tượng instance để connect đến MogoDb
-const mongoClientInstance = new MongoClient(MONGODB_URL, {
+const mongoClientInstance = new MongoClient(env.MONGODB_URI, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
@@ -21,7 +19,7 @@ const mongoClientInstance = new MongoClient(MONGODB_URL, {
 export const CONNECT_DB = async () => {
   await mongoClientInstance.connect()
 
-  trelloDatabaseInstance = mongoClientInstance.db(DATABASE_NAME)
+  trelloDatabaseInstance = mongoClientInstance.db(env.DATABASE_NAME)
 }
 
 export const CLOSE_DB = async () => {
