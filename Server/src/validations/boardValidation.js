@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Updated by hgbaodev.com's author on August 17 2023
  * YouTube: https://youtube.com/@hgbaodev
@@ -20,16 +21,13 @@ const createNew = async (req, res, next) => {
   })
 
   try {
-    console.log('req.body', req.body)
 
     //Chỉ định abortEarly false để trường hợp có nhiều lỗi trả về nhiều lỗi
     await correctCondition.validateAsync(req.body, { abortEarly: false })
-    // next()
-
-    res.status(StatusCodes.CREATED).json({ message: 'POST: from validation joi', code: StatusCodes.CREATED })
+    //Validate dữ liệu thành công thì cho request đi tiếp sang controller
+    next()
   } catch (error) {
     console.log(error)
-    // console.log(Error(error))
     res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
       errors: new Error(error).message
     })
