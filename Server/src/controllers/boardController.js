@@ -5,6 +5,7 @@
  * "A bit of fragrance clings to the hand that gives flowers!"
  */
 import { StatusCodes } from 'http-status-codes'
+import { boardService } from '~/services/boardService'
 
 // eslint-disable-next-line no-unused-vars
 const createNew = async (req, res, next) => {
@@ -18,12 +19,11 @@ const createNew = async (req, res, next) => {
 
 
     //Điều hướng dữ liệu sang tầng Service
+    const createBoard = await boardService.createNew(req.body)
 
     //Có kết quả thì trả về phía client
-    res.status(StatusCodes.CREATED).json({ message: 'POST: from controller', code: StatusCodes.CREATED })
-  } catch (error) {
-    next(error)
-  }
+    res.status(StatusCodes.CREATED).json(createBoard)
+  } catch (error) { next(error) }
 }
 
 export const boardContoller = {
