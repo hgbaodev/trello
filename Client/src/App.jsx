@@ -1,12 +1,14 @@
-import Board from './pages/Borads/_id'
+import ScrollTop from '~/components/ScrollTop'
+import Routes from '~/routes'
+import ThemeCustomization from '~/themes'
 
-function App() {
+const App = () => {
   return (
-    <>
-      {/* React Router Dom */}
-      {/* Board Detail */}
-      <Board/>
-    </>
+    <ThemeCustomization>
+      <ScrollTop>
+        <Routes />
+      </ScrollTop>
+    </ThemeCustomization>
   )
 }
 
