@@ -20,8 +20,11 @@ import ListCards from './ListCards/ListCards'
 import { mapOrder } from '~/utils/sorts'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { useTheme } from '@mui/material'
 
 function Column({ column }) {
+
+  const theme = useTheme()
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: column._id,
@@ -53,15 +56,15 @@ function Column({ column }) {
         sx={{
           minWidth: '300px',
           maxWidth: '300px',
-          bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#333643' : '#ebecf0'),
+          bgcolor: (theme.palette.mode === 'dark' ? '#333643' : '#ebecf0'),
           ml: 2,
           borderRadius: '6px',
           height: 'fit-content',
-          maxHeight: (theme) => `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5)})`
+          maxHeight: `calc(${theme.palette.boardContentHeight} - ${theme.spacing(5)})`
         }}>
         {/* Box collum header */}
         <Box sx={{
-          height: (theme) => theme.trello.columnHeaderHeight,
+          height: theme.palette.columnHeaderHeight,
           p: 2,
           display: 'flex',
           alignItems: 'center',
@@ -128,7 +131,7 @@ function Column({ column }) {
         <ListCards cards={orderedCards}/>
         {/* Box column footer */}
         <Box sx={{
-          height: (theme) => theme.trello.columnFooterHeight,
+          height: theme.palette.columnFooterHeight,
           p: 2,
           display: 'flex',
           alignItems: 'center',

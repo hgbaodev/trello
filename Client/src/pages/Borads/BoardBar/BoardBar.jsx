@@ -10,6 +10,7 @@ import AvatarGroup from '@mui/material/AvatarGroup'
 import { Button, Tooltip } from '@mui/material'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import { capitalizeFirstLetter } from '~/utils/formaters'
+import { useTheme } from '@mui/material'
 
 const MENU_STYLES = {
   color: 'white',
@@ -26,17 +27,18 @@ const MENU_STYLES = {
 }
 
 const BoardBar = ({ board }) => {
+  const theme = useTheme()
   return (
     <Box sx={{
       width: '100%',
-      height: (theme) => theme.trello.boardBardHeight,
+      height: theme.palette.boardBardHeight,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
       gap: 2,
       paddingX: 2,
       overflowX: 'auto',
-      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2')
+      bgcolor: (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2')
     }}>
       <Box sx={{
         display: 'flex',

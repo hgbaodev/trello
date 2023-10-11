@@ -21,6 +21,7 @@ import { cloneDeep } from 'lodash'
 
 import Column from './ListColumns/Column/Column'
 import Card from './ListColumns/Column/ListCards/Card.jsx/Card'
+import { useTheme } from '@mui/material'
 
 const ACTIVE_DRAG_ITEM_TYPE = {
   COLUMN: 'ACTIVE_DRAG_ITEM_TYPE_COLUMN',
@@ -34,7 +35,7 @@ const customDropAnimation = {
 }
 
 const BoardContent = ({ board }) => {
-
+  const theme = useTheme()
   // const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 10 } })
   const mouseSensor = useSensor(MouseSensor, { activationConstraint: { distance: 10 } })
   const touchSensor = useSensor(TouchSensor, { activationConstraint: { delay: 250, tolerance: 500 } })
@@ -261,9 +262,9 @@ const BoardContent = ({ board }) => {
       onDragOver={handleDrapOver}
       onDragEnd={handleDrapEnd}>
       <Box sx={{
-        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2'),
+        bgcolor: (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2'),
         width: '100%',
-        height: (theme) => theme.trello.boardContentHeight,
+        height: theme.palette.boardContentHeight,
         p: '10px 0'
       }}>
         <Box sx={{
