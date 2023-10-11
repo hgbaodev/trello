@@ -1,8 +1,10 @@
 import Box from '@mui/material/Box'
 import Card from './Card.jsx/Card'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import { useTheme } from '@mui/material'
 
 function ListCards({ cards }) {
+  const theme = useTheme()
   return (
     <SortableContext items={cards?.map(c => c._id)} strategy={verticalListSortingStrategy}>
       <Box sx={{
@@ -13,11 +15,11 @@ function ListCards({ cards }) {
         gap: 1,
         overflowX: 'hidden',
         overflowY: 'auto',
-        maxHeight: (theme) => `calc(
-          ${theme.trello.boardContentHeight} - 
+        maxHeight: `calc(
+          ${theme.palette.boardContentHeight} - 
           ${theme.spacing(5)} -
-          ${theme.trello.columnHeaderHeight} - 
-          ${theme.trello.columnFooterHeight}
+          ${theme.palette.columnHeaderHeight} - 
+          ${theme.palette.columnFooterHeight}
         )`,
         '&::-webkit-scrollbar-thumb': {
           backgroundColor: '#ced0da'

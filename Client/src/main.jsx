@@ -10,9 +10,6 @@ import App from './App'
 import { store } from '~/store/index'
 import reportWebVitals from './reportWebVitals'
 import { APP_BASE_NAME } from './config'
-import CssBaseline from '@mui/material/CssBaseline'
-import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles'
-import theme from '~/theme'
 
 const container = document.getElementById('root')
 const root = createRoot(container)
@@ -20,11 +17,8 @@ const root = createRoot(container)
 root.render(
   <ReduxProvider store={store}>
     <BrowserRouter basename={APP_BASE_NAME}>
-      <CssVarsProvider theme={theme}>
-        <App/>
-        <ToastContainer/>
-        <CssBaseline/>
-      </CssVarsProvider>
+      <App/>
+      <ToastContainer/>
     </BrowserRouter>
   </ReduxProvider>
 )

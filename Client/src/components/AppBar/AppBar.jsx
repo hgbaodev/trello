@@ -20,10 +20,8 @@ import { InputAdornment } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import CloseIcon from '@mui/icons-material/Close'
 import { useState } from 'react'
-import theme from '~/theme'
 
 const AppBar = () => {
-  console.log('theme', theme)
   const [searchValue, setSearchValue] = useState('')
   return (
     <Box sx={{
