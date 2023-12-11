@@ -17,6 +17,7 @@ const Board = () => {
     })
   }, [])
 
+  // eslint-disable-next-line no-console
   console.log('board', board)
 
   return (
