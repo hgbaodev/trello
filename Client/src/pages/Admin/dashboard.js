@@ -1,13 +1,6 @@
 // material-ui
 import { Grid } from '@mui/material'
 
-// project-imports
-
-// import WelcomeBanner from 'sections/dashboard/WelcomeBanner'
-
-
-// assets
-
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
 const DashboardDefault = () => {
